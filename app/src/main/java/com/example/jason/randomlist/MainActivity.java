@@ -47,4 +47,10 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
+    int getRandomNuber(int min, int max) {
+        // Get Random Numbers:
+        int random = (int )(Math.random() * max + min);
+        return random;
+    }
 }
