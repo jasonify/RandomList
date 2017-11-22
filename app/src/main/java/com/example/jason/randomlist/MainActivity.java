@@ -2,7 +2,10 @@ package com.example.jason.randomlist;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
@@ -17,5 +20,14 @@ public class MainActivity extends AppCompatActivity {
         ListAdapter topicsAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, topics);
         ListView topicsListView = (ListView) findViewById(R.id.topicsList);
         topicsListView.setAdapter(topicsAdapter);
+
+        Button btnAdd = (Button) findViewById(R.id.btnAdd);
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("BUTTON", "clicked");
+            }
+        });
+
     }
 }
