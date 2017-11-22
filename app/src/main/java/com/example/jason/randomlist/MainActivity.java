@@ -11,6 +11,10 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -18,9 +22,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        String[] topics = {"movement", "opposite", "gravity", "heavy"};
-        ListAdapter topicsAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, topics);
-        ListView topicsListView = (ListView) findViewById(R.id.topicsList);
+        String[] topicsArray = {"movement", "opposite", "gravity", "heavy"};
+
+        final List<String> topics = new ArrayList<>(Arrays.asList(topicsArray));
+//        ArrayList<String> places = new ArrayList<String>(
+//                Arrays.asList("Buenos Aires", "Córdoba", "La Plata"));
+
+
+        final ArrayAdapter topicsAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, topics);
+        final ListView topicsListView = (ListView) findViewById(R.id.topicsList);
         topicsListView.setAdapter(topicsAdapter);
 
         final EditText etNewWord = (EditText) findViewById(R.id.etNewWord);
@@ -30,8 +40,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String etText = etNewWord.getText().toString();
                 Log.d("BUTTON", etText);
-                
-
+                topics.add(etText);
+                etNewWord.setText("");
+                topicsAdapter.notifyDataSetChanged();
             }
         });
 
