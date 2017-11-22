@@ -6,8 +6,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,11 +23,15 @@ public class MainActivity extends AppCompatActivity {
         ListView topicsListView = (ListView) findViewById(R.id.topicsList);
         topicsListView.setAdapter(topicsAdapter);
 
+        final EditText etNewWord = (EditText) findViewById(R.id.etNewWord);
         Button btnAdd = (Button) findViewById(R.id.btnAdd);
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("BUTTON", "clicked");
+                String etText = etNewWord.getText().toString();
+                Log.d("BUTTON", etText);
+                
+
             }
         });
 
