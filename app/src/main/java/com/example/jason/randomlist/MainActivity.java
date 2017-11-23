@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         Button btnRandom = (Button) findViewById(R.id.btnRandom);
+        final TextView etRandom = (TextView) findViewById(R.id.tvRandom);
         btnRandom.setOnClickListener(new View.OnClickListener(){
 
             @Override
@@ -56,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
                 String word = topics.get(randomNumber);
                 Log.d("BUTTON", word);
                 Toast.makeText(getApplicationContext(), word, Toast.LENGTH_LONG).show();
+                etRandom.setText(word);
             }
         });
 
