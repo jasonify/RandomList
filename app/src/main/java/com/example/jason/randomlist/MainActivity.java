@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
         final List<String> topics = new ArrayList<>(Arrays.asList(topicsArray));
 //        ArrayList<String> places = new ArrayList<String>(
-//                Arrays.asList("Buenos Aires", "Córdoba", "La Plata"));
+//        Arrays.asList("Buenos Aires", "Córdoba", "La Plata"));
 
 
         final ArrayAdapter topicsAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, topics);
@@ -46,11 +46,20 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        Button btnRandom = (Button) findViewById(R.id.btnRandom);
+        btnRandom.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                Log.d("BUTTON", "random");
+            }
+        });
+
     }
 
     int getRandomNuber(int min, int max) {
         // Get Random Numbers:
-        int random = (int )(Math.random() * max + min);
+        int random = (int) (Math.random() * max + min);
         return random;
     }
 }
