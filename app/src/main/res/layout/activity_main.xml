@@ -16,7 +16,7 @@
             android:layout_height="100dp"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="Name" />
+            android:text="" />
 
         <Button
             android:id="@+id/btnAdd"
