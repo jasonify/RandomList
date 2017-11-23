@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -54,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
                 int randomNumber = getRandomNuber(0, topics.size());
                 String word = topics.get(randomNumber);
                 Log.d("BUTTON", word);
-
+                Toast.makeText(getApplicationContext(), word, Toast.LENGTH_LONG).show();
             }
         });
 
