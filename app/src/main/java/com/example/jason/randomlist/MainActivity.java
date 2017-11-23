@@ -51,7 +51,10 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                Log.d("BUTTON", "random");
+                int randomNumber = getRandomNuber(0, topics.size());
+                String word = topics.get(randomNumber);
+                Log.d("BUTTON", word);
+
             }
         });
 
