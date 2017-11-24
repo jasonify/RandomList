@@ -13,6 +13,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.pushtorefresh.storio2.sqlite.queries.Query;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -65,6 +67,39 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        StringBuilder sb = new StringBuilder();
+        for (String s : topics)
+        {
+            sb.append(s);
+            sb.append("\t");
+        }
+
+        String arrayStr = sb.toString();
+        System.out.println(arrayStr);
+
+
+        final List<String> topics2 =  new ArrayList<>(Arrays.asList(arrayStr.split("\t")));
+        System.out.println(topics2.get(0));
+
+//        destIndexArray = output.toString.split(",")
+
+
+//
+//        StorIOContentResolver storIOContentResolver = DefaultStorIOContentResolver.builder()
+//                .contentResolver(yourContentResolver)
+//                .addTypeMapping(SomeType.class, typeMapping) // required for object mapping
+//                .build();
+//
+//        List<String> tweets = storIOSQLite
+//                .get()
+//                .listOfObjects(String.class) // Type safety
+//                .withQuery(Query.builder() // Query builder
+//                        .table("tweets")
+//                        .where("author = ?")
+//                        .whereArgs("artem_zin") // Varargs Object..., no more new String[] {"I", "am", "tired", "of", "this", "shit"}
+//                        .build()) // Query is immutable — you can save it and share without worries
+//                .prepare() // Operation builder
+//                .executeAsBlocking(); // Control flow is readable from top to bottom, just like with RxJava
     }
 
     /**
