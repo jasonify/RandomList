@@ -1,5 +1,7 @@
 package com.example.jason.randomlist;
 
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -67,6 +69,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+        Log.d("three", "threeee");
+
         StringBuilder sb = new StringBuilder();
         for (String s : topics)
         {
@@ -75,11 +80,19 @@ public class MainActivity extends AppCompatActivity {
         }
 
         String arrayStr = sb.toString();
-        System.out.println(arrayStr);
+        Log.d("one", arrayStr);
+//        System.out.println(arrayStr);
 
 
         final List<String> topics2 =  new ArrayList<>(Arrays.asList(arrayStr.split("\t")));
         System.out.println(topics2.get(0));
+
+        Log.d("f", topics2.get(0));
+
+        SharedPreferences pref =
+                PreferenceManager.getDefaultSharedPreferences(this);
+        String storedTopics = pref.getString("topics", "");
+
 
 //        destIndexArray = output.toString.split(",")
 
