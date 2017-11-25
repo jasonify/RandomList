@@ -28,19 +28,26 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        String[] topicsArray = {"movement", "opposite", "gravity", "heavy"};
-
-        final List<String> topics = new ArrayList<>(Arrays.asList(topicsArray));
-//        ArrayList<String> places = new ArrayList<String>(
-//        Arrays.asList("Buenos Aires", "Córdoba", "La Plata"));
-
-
-        final ArrayAdapter topicsAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, topics);
         final ListView topicsListView = (ListView) findViewById(R.id.topicsList);
-        topicsListView.setAdapter(topicsAdapter);
 
         final EditText etNewWord = (EditText) findViewById(R.id.etNewWord);
         Button btnAdd = (Button) findViewById(R.id.btnAdd);
+
+        SharedPreferences pref =
+                PreferenceManager.getDefaultSharedPreferences(this);
+        String storedTopicsString = pref.getString("topics", "");
+
+        String[] topicsArray = {"movement", "opposite", "gravity", "heavy"};
+        List<String> topics2 = new ArrayList<>(Arrays.asList(topicsArray));
+        // Overwrite with local storage:
+        if (!storedTopicsString.equals("") ) {
+            topics2 = new ArrayList<>(Arrays.asList(storedTopicsString.split("\t")));
+        }
+        final List<String> topics  =  topics2;
+        
+        final ArrayAdapter topicsAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, topics);
+        topicsListView.setAdapter(topicsAdapter);
+
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -80,39 +87,9 @@ public class MainActivity extends AppCompatActivity {
         }
 
         String arrayStr = sb.toString();
-        Log.d("one", arrayStr);
-//        System.out.println(arrayStr);
 
 
-        final List<String> topics2 =  new ArrayList<>(Arrays.asList(arrayStr.split("\t")));
-        System.out.println(topics2.get(0));
 
-        Log.d("f", topics2.get(0));
-
-        SharedPreferences pref =
-                PreferenceManager.getDefaultSharedPreferences(this);
-        String storedTopics = pref.getString("topics", "");
-
-
-//        destIndexArray = output.toString.split(",")
-
-
-//
-//        StorIOContentResolver storIOContentResolver = DefaultStorIOContentResolver.builder()
-//                .contentResolver(yourContentResolver)
-//                .addTypeMapping(SomeType.class, typeMapping) // required for object mapping
-//                .build();
-//
-//        List<String> tweets = storIOSQLite
-//                .get()
-//                .listOfObjects(String.class) // Type safety
-//                .withQuery(Query.builder() // Query builder
-//                        .table("tweets")
-//                        .where("author = ?")
-//                        .whereArgs("artem_zin") // Varargs Object..., no more new String[] {"I", "am", "tired", "of", "this", "shit"}
-//                        .build()) // Query is immutable — you can save it and share without worries
-//                .prepare() // Operation builder
-//                .executeAsBlocking(); // Control flow is readable from top to bottom, just like with RxJava
     }
 
     /**
