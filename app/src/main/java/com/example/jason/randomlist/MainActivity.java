@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
             topics2 = new ArrayList<>(Arrays.asList(storedTopicsString.split("\t")));
         }
         final List<String> topics  =  topics2;
-        
+
         final ArrayAdapter topicsAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, topics);
         topicsListView.setAdapter(topicsAdapter);
 
@@ -55,10 +55,28 @@ public class MainActivity extends AppCompatActivity {
                 if (etText.length() == 0) {
                     return;
                 }
-                Log.d("BUTTON", etText);
+
                 topics.add(etText);
                 etNewWord.setText("");
                 topicsAdapter.notifyDataSetChanged();
+
+                // Save storage
+                StringBuilder sb = new StringBuilder();
+                for (String s : topics)
+                {
+                    sb.append(s);
+                    sb.append("\t");
+                }
+
+                String arrayStr = sb.toString();
+                ///
+                SharedPreferences pref =
+                        PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+                SharedPreferences.Editor edit = pref.edit();
+                edit.putString("topics", arrayStr);
+                edit.commit();
+                // Save Storage
+
             }
         });
 
@@ -76,21 +94,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-        Log.d("three", "threeee");
-
-        StringBuilder sb = new StringBuilder();
-        for (String s : topics)
-        {
-            sb.append(s);
-            sb.append("\t");
-        }
-
-        String arrayStr = sb.toString();
-
-
-
     }
+
 
     /**
      * Hides the soft keyboard
