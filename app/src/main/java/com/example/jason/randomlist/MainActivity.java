@@ -59,24 +59,8 @@ public class MainActivity extends AppCompatActivity {
                 topics.add(etText);
                 etNewWord.setText("");
                 topicsAdapter.notifyDataSetChanged();
-
-                // Save storage
-                StringBuilder sb = new StringBuilder();
-                for (String s : topics)
-                {
-                    sb.append(s);
-                    sb.append("\t");
-                }
-
-                String arrayStr = sb.toString();
-                ///
-                SharedPreferences pref =
-                        PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-                SharedPreferences.Editor edit = pref.edit();
-                edit.putString("topics", arrayStr);
-                edit.commit();
-                // Save Storage
-
+                // Storage
+                storeStuff(topics);
             }
         });
 
@@ -94,9 +78,32 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // Hide keyboard
+        // Check if no view has focus:
+        View view = this.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager)getSystemService(getApplicationContext().INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
 
+    public void storeStuff(List<String> topics) {
+        // Save storage
+        StringBuilder sb = new StringBuilder();
+        for (String s : topics)
+        {
+            sb.append(s);
+            sb.append("\t");
+        }
 
+        String arrayStr = sb.toString();
+        ///
+        SharedPreferences pref =
+                PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        SharedPreferences.Editor edit = pref.edit();
+        edit.putString("topics", arrayStr);
+        edit.commit();
+    }
     /**
      * Hides the soft keyboard
      */
